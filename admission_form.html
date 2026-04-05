@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YV&HF — Admission Form</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & ROOT ───────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ac:#0071e3;--ac-l:#e8f1fc;--ac-d:#005bb5;
+  --sur:#ffffff;--sur2:#f5f5f7;--sur3:#e8e8ed;
+  --t1:#1d1d1f;--t2:#515154;--t3:#98989d;
+  --bd:#d2d2d7;--bdf:#0071e3;
+  --gr:#28a745;--gr-l:#eaf7ed;
+  --rd:#d93025;--rd-l:#fce8e6;
+  --warn:#f59e0b;
+  --r:14px;--rs:9px;--rl:20px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--sur2);
+  color:var(--t1);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────────── */
+.page-wrap{max-width:720px;margin:0 auto;padding:0 16px 80px;}
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+.header{
+  background:var(--ac);
+  padding:36px 32px 30px;
+  border-radius:0 0 28px 28px;
+  margin-bottom:28px;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.header::after{
+  content:'';position:absolute;bottom:-60px;right:60px;
+  width:140px;height:140px;border-radius:50%;
+  background:rgba(255,255,255,.04);
+}
+.header-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.18);
+  border-radius:99px;padding:5px 14px;
+  font-size:11px;font-weight:500;color:#fff;
+  letter-spacing:.05em;margin-bottom:14px;
+  border:1px solid rgba(255,255,255,.2);
+}
+.header h1{
+  font-family:'DM Serif Display',serif;
+  font-size:30px;font-weight:400;color:#fff;
+  margin-bottom:5px;letter-spacing:-.01em;line-height:1.2;
+}
+.header p{font-size:13px;color:rgba(255,255,255,.72);line-height:1.6;}
+.header-meta{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap;}
+.header-meta span{
+  font-size:12px;color:rgba(255,255,255,.65);
+  display:flex;align-items:center;gap:5px;
+}
+.header-meta span::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:rgba(255,255,255,.4);display:inline-block;
+}
+
+/* ── STEP PROGRESS ──────────────────────────────────────────── */
+.steps-wrap{margin-bottom:24px;}
+.steps-nav{
+  display:flex;background:var(--sur);
+  border-radius:var(--r);border:.5px solid var(--bd);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.step-tab{
+  flex:1;padding:12px 8px;text-align:center;
+  font-size:11px;font-weight:500;color:var(--t3);
+  border-right:.5px solid var(--bd);user-select:none;
+  transition:all .2s;
+}
+.step-tab:last-child{border-right:none;}
+.step-tab .sn{display:block;font-size:15px;font-weight:700;margin-bottom:2px;}
+.step-tab.active{color:var(--ac);background:var(--ac-l);}
+.step-tab.active .sn{color:var(--ac);}
+.step-tab.done{color:var(--gr);}
+.step-tab.done .sn{color:var(--gr);}
+.progress-bar{height:3px;background:var(--sur3);margin-top:10px;border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--ac);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+
+/* ── CARDS ──────────────────────────────────────────────────── */
+.card{
+  background:var(--sur);border-radius:var(--rl);
+  border:.5px solid var(--bd);margin-bottom:16px;
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.card-head{padding:18px 22px 14px;border-bottom:.5px solid var(--bd);}
+.card-head h2{font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;}
+.card-head p{font-size:12px;color:var(--t2);}
+.card-body{padding:18px 22px;}
+
+/* ── FORM FIELDS ────────────────────────────────────────────── */
+.field{margin-bottom:15px;}
+.field:last-child{margin-bottom:0;}
+.field>label{
+  display:block;font-size:12px;font-weight:500;
+  color:var(--t2);margin-bottom:6px;letter-spacing:.01em;
+}
+.field>label .req{color:var(--rd);margin-left:2px;}
+.field>label .note{font-weight:400;font-size:11px;color:var(--t3);margin-left:4px;}
+.field input[type=text],
+.field input[type=email],
+.field input[type=tel],
+.field input[type=date],
+.field input[type=number],
+.field select,
+.field textarea{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--bd);border-radius:var(--rs);
+  font-size:14px;color:var(--t1);background:var(--sur);
+  font-family:'DM Sans',sans-serif;
+  transition:border-color .15s,box-shadow .15s;
+  -webkit-appearance:none;appearance:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--bdf);
+  box-shadow:0 0 0 3px rgba(0,113,227,.12);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--t3);}
+.field textarea{resize:vertical;min-height:72px;line-height:1.6;}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2398989d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;
+  padding-right:36px;cursor:pointer;
+}
+.field.invalid input,.field.invalid select,.field.invalid textarea{
+  border-color:var(--rd);background:var(--rd-l);
+}
+.field .err-msg{
+  font-size:11px;color:var(--rd);margin-top:4px;
+  display:none;align-items:center;gap:4px;
+}
+.field.invalid .err-msg{display:flex;}
+
+/* ── GRIDS ──────────────────────────────────────────────────── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+@media(max-width:540px){.g2,.g3{grid-template-columns:1fr;}}
+
+/* ── PHONE ROW ──────────────────────────────────────────────── */
+.phone-row{display:flex;gap:8px;}
+.phone-cc{flex:0 0 148px;}
+.phone-cc select{font-size:13px;padding:11px 10px;}
+.phone-num{flex:1;}
+@media(max-width:420px){.phone-cc{flex:0 0 120px;}}
+
+/* ── PILL SELECTOR ──────────────────────────────────────────── */
+.pill-group{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;}
+.pill{
+  padding:8px 18px;border-radius:99px;
+  border:1.5px solid var(--bd);font-size:13px;
+  font-weight:500;color:var(--t2);cursor:pointer;
+  transition:all .15s;user-select:none;background:var(--sur);
+  font-family:'DM Sans',sans-serif;
+}
+.pill:hover{border-color:var(--ac);color:var(--ac);}
+.pill.selected{border-color:var(--ac);background:var(--ac);color:#fff;}
+
+/* ── DAY CHIPS ──────────────────────────────────────────────── */
+.chip-group{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.chip{
+  padding:8px 13px;border-radius:var(--rs);
+  border:1.5px solid var(--bd);font-size:12px;
+  font-weight:600;color:var(--t2);
+  user-select:none;background:var(--sur);
+  transition:all .15s;
+}
+.chip.pickable{cursor:pointer;}
+.chip.pickable:hover{border-color:var(--ac);color:var(--ac);}
+.chip.picked{border-color:var(--ac);background:var(--ac-l);color:var(--ac);cursor:pointer;}
+.chip.locked{border-color:var(--gr);background:var(--gr-l);color:#1a6632;cursor:default;}
+.chip.disabled{opacity:.22;cursor:not-allowed;pointer-events:none;}
+.day-hint{font-size:12px;color:var(--t3);margin-top:7px;line-height:1.4;}
+
+/* ── PHOTO UPLOAD ───────────────────────────────────────────── */
+.upload-zone{
+  border:2px dashed var(--bd);border-radius:var(--rs);
+  padding:20px;text-align:center;cursor:pointer;
+  background:var(--sur2);transition:all .2s;
+}
+.upload-zone:hover{border-color:var(--ac);background:var(--ac-l);}
+.upload-zone input{display:none;}
+.upload-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--ac-l);display:flex;
+  align-items:center;justify-content:center;
+  margin:0 auto 10px;
+}
+.upload-icon svg{width:20px;height:20px;stroke:var(--ac);fill:none;stroke-width:2;}
+.upload-zone p{font-size:13px;color:var(--t2);margin-bottom:2px;font-weight:500;}
+.upload-zone span{font-size:11px;color:var(--t3);}
+.photo-preview{
+  width:80px;height:90px;object-fit:cover;
+  border-radius:var(--rs);border:1.5px solid var(--bd);
+  display:none;margin:0 auto;
+}
+
+/* ── HINT ───────────────────────────────────────────────────── */
+.hint{font-size:11px;color:var(--t3);margin-top:5px;line-height:1.5;}
+
+/* ── RULES ──────────────────────────────────────────────────── */
+.rules-box{
+  background:var(--sur2);border-radius:var(--rs);
+  padding:14px 16px;max-height:210px;overflow-y:auto;
+  border:.5px solid var(--bd);
+}
+.rules-box li{font-size:12.5px;color:var(--t2);line-height:1.75;margin-bottom:2px;padding-left:2px;}
+
+/* ── CONSENT ────────────────────────────────────────────────── */
+.consent-item{
+  display:flex;align-items:flex-start;gap:11px;
+  padding:13px;border-radius:var(--rs);
+  border:1.5px solid var(--bd);margin-bottom:10px;
+  cursor:pointer;transition:all .2s;
+}
+.consent-item:hover{border-color:var(--ac);}
+.consent-item.checked{border-color:var(--gr);background:var(--gr-l);}
+.consent-item input[type=checkbox]{
+  margin-top:2px;width:16px;height:16px;
+  accent-color:var(--gr);flex-shrink:0;cursor:pointer;
+}
+.consent-item label{font-size:13px;color:var(--t1);line-height:1.6;cursor:pointer;}
+
+/* ── NAVIGATION BUTTONS ─────────────────────────────────────── */
+.nav-row{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-top:8px;
+}
+.nav-row.right{justify-content:flex-end;}
+.btn-back{
+  padding:12px 24px;border-radius:99px;
+  border:1.5px solid var(--bd);background:var(--sur);
+  font-size:14px;font-weight:500;color:var(--t1);
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:all .15s;
+}
+.btn-back:hover{background:var(--sur2);border-color:var(--t3);}
+.btn-next{
+  padding:12px 28px;border-radius:99px;border:none;
+  background:var(--ac);color:#fff;font-size:14px;
+  font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.btn-next:hover{background:var(--ac-d);}
+.btn-next:active{transform:scale(.98);}
+.btn-submit{
+  padding:15px;border-radius:99px;border:none;
+  background:var(--ac);color:#fff;font-size:15px;
+  font-weight:600;cursor:pointer;width:100%;
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+  letter-spacing:.01em;
+}
+.btn-submit:hover{background:var(--ac-d);}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;}
+.btn-new{
+  padding:14px;border-radius:99px;
+  border:2px solid var(--ac);background:transparent;
+  color:var(--ac);font-size:15px;font-weight:600;
+  cursor:pointer;width:100%;margin-top:11px;
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.btn-new:hover{background:var(--ac-l);}
+
+/* ── REVIEW PAGE ────────────────────────────────────────────── */
+.review-hero{
+  background:var(--ac);
+  border-radius:var(--rl) var(--rl) 0 0;
+  padding:22px;text-align:center;color:#fff;
+}
+.review-avatar{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;color:#fff;
+  margin:0 auto 12px;
+  border:2px solid rgba(255,255,255,.4);
+  overflow:hidden;
+}
+.review-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.review-hero h3{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;color:#fff;}
+.review-hero p{font-size:12px;color:rgba(255,255,255,.7);margin-top:3px;}
+.review-section{padding:16px 20px;border-bottom:.5px solid var(--bd);}
+.review-section:last-child{border-bottom:none;}
+.review-section h4{
+  font-size:10px;font-weight:700;color:var(--t3);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;
+}
+.review-row{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;padding:5px 0;
+  border-bottom:.5px solid var(--sur2);
+}
+.review-row:last-child{border-bottom:none;}
+.rk{font-size:12px;color:var(--t2);flex-shrink:0;width:44%;}
+.rv{font-size:12px;font-weight:500;color:var(--t1);text-align:right;width:54%;word-break:break-word;}
+.rv.green{color:var(--gr);}
+.day-tags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;}
+.day-tag{
+  padding:3px 9px;border-radius:99px;
+  background:var(--ac-l);color:var(--ac);
+  font-size:11px;font-weight:600;
+}
+
+/* ── SUCCESS ────────────────────────────────────────────────── */
+.success-wrap{padding:48px 24px;text-align:center;}
+.success-icon{
+  width:68px;height:68px;border-radius:50%;
+  background:var(--gr-l);display:flex;
+  align-items:center;justify-content:center;
+  margin:0 auto 18px;
+}
+.success-icon svg{width:32px;height:32px;stroke:var(--gr);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.success-wrap h2{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;margin-bottom:8px;}
+.success-wrap p{font-size:14px;color:var(--t2);max-width:340px;margin:0 auto 26px;line-height:1.7;}
+.success-detail{
+  background:var(--sur2);border-radius:var(--r);
+  padding:18px 22px;max-width:320px;margin:0 auto 28px;
+  border:.5px solid var(--bd);text-align:left;
+}
+.success-detail .dl{font-size:10px;color:var(--t3);font-weight:600;letter-spacing:.05em;margin-bottom:3px;}
+.success-detail .dv{font-size:15px;font-weight:600;margin-bottom:12px;}
+.success-detail .dv:last-child{margin-bottom:0;}
+
+/* ── SENDING OVERLAY ────────────────────────────────────────── */
+.sending-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(255,255,255,.85);
+  z-index:999;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;
+}
+.sending-overlay.visible{display:flex;}
+.spinner{
+  width:40px;height:40px;border:3px solid var(--bd);
+  border-top-color:var(--ac);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.sending-overlay p{font-size:14px;color:var(--t2);font-weight:500;}
+
+/* ── PAGES ──────────────────────────────────────────────────── */
+.form-page{display:none;}
+.form-page.active{display:block;}
+
+/* ── ERROR BANNER ───────────────────────────────────────────── */
+.error-banner{
+  background:var(--rd-l);border:1px solid var(--rd);
+  border-radius:var(--rs);padding:12px 16px;
+  margin-bottom:16px;font-size:13px;color:var(--rd);
+  display:none;
+}
+.error-banner.visible{display:block;}
+</style>
+</head>
+<body>
+
+<!-- SENDING OVERLAY -->
+<div class="sending-overlay" id="sendingOverlay">
+  <div class="spinner"></div>
+  <p>Submitting your admission...</p>
+</div>
+
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">YV&HF · Tennis Academy · Ahmedabad</div>
+    <h1>Admission Form</h1>
+    <p>Yuva Vikas &amp; Health Foundation<br>Gujarat College Sports Ground, Ellis Bridge, Ahmedabad — 380006</p>
+    <div class="header-meta">
+      <span>+91 99786 60077</span>
+      <span>sejalbhatiya4@gmail.com</span>
+      <span>079-26401112</span>
+    </div>
+  </div>
+
+  <!-- STEP NAV -->
+  <div class="steps-wrap">
+    <div class="steps-nav">
+      <div class="step-tab active" id="tab1"><span class="sn">1</span>Personal</div>
+      <div class="step-tab" id="tab2"><span class="sn">2</span>Schedule</div>
+      <div class="step-tab" id="tab3"><span class="sn">3</span>Review &amp; Submit</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:33%"></div></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 1 — PERSONAL INFORMATION
+  ════════════════════════════════════════════════ -->
+  <div class="form-page active" id="page1">
+
+    <div class="card">
+      <div class="card-head"><h2>Player information</h2><p>Basic personal details of the player joining the academy</p></div>
+      <div class="card-body">
+        <div class="g3">
+          <div class="field" id="f-fname">
+            <label>First name <span class="req">*</span></label>
+            <input type="text" id="fname" placeholder="First name">
+            <div class="err-msg">Required</div>
+          </div>
+          <div class="field">
+            <label>Middle name</label>
+            <input type="text" id="mname" placeholder="Middle name">
+          </div>
+          <div class="field" id="f-sname">
+            <label>Surname <span class="req">*</span></label>
+            <input type="text" id="sname" placeholder="Surname">
+            <div class="err-msg">Required</div>
+          </div>
+        </div>
+
+        <div class="g2">
+          <div class="field" id="f-dob">
+            <label>Date of birth <span class="req">*</span></label>
+            <input type="date" id="dob">
+            <div class="err-msg">Required</div>
+          </div>
+          <div class="field" id="f-gender">
+            <label>Gender <span class="req">*</span></label>
+            <div class="pill-group">
+              <div class="pill" data-group="gender" data-val="Male" onclick="selectPill(this)">Male</div>
+              <div class="pill" data-group="gender" data-val="Female" onclick="selectPill(this)">Female</div>
+            </div>
+            <div class="err-msg" id="e-gender">Please select gender</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Photo <span class="req">*</span></label>
+          <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+            <img class="photo-preview" id="photoPreview" alt="Photo preview">
+            <div id="uploadUI">
+              <div class="upload-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <p>Tap to upload passport-size photo</p>
+              <span>JPG or PNG · Maximum 5 MB</span>
+            </div>
+            <input type="file" id="photoInput" accept="image/jpeg,image/png" onchange="handlePhoto(this)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Contact details</h2><p>How we can reach you or your guardian</p></div>
+      <div class="card-body">
+        <div class="field">
+          <label>Email address</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+        <div class="field" id="f-phone">
+          <label>Contact number <span class="req">*</span></label>
+          <div class="phone-row">
+            <div class="phone-cc"><select id="phoneCC"></select></div>
+            <div class="phone-num"><input type="tel" id="phoneNum" placeholder="Phone number"></div>
+          </div>
+          <div class="err-msg">Required</div>
+        </div>
+        <div class="field" id="f-emphone">
+          <label>Emergency contact <span class="req">*</span></label>
+          <div class="phone-row">
+            <div class="phone-cc"><select id="emCC"></select></div>
+            <div class="phone-num"><input type="tel" id="emNum" placeholder="Parent / Guardian number"></div>
+          </div>
+          <div class="err-msg">Required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Address</h2><p>Player's current residential address</p></div>
+      <div class="card-body">
+        <div class="field" id="f-addr1">
+          <label>Flat, House no., Building, Company, Apartment <span class="req">*</span></label>
+          <input type="text" id="addr1" placeholder="e.g. Flat 4B, Sunshine Apartments">
+          <div class="err-msg">Required</div>
+        </div>
+        <div class="field" id="f-addr2">
+          <label>Area, Street, Sector, Village <span class="req">*</span></label>
+          <input type="text" id="addr2" placeholder="e.g. MG Road, Sector 12">
+          <div class="err-msg">Required</div>
+        </div>
+        <div class="field">
+          <label>Landmark</label>
+          <input type="text" id="addr3" placeholder="e.g. Near City Mall">
+        </div>
+        <div class="g2">
+          <div class="field" id="f-city">
+            <label>Town / City <span class="req">*</span></label>
+            <input type="text" id="city" placeholder="e.g. Ahmedabad">
+            <div class="err-msg">Required</div>
+          </div>
+          <div class="field" id="f-pin">
+            <label>Pincode <span class="req">*</span></label>
+            <input type="text" id="pin" placeholder="6-digit PIN" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'')">
+            <div class="err-msg">Enter valid 6-digit PIN</div>
+          </div>
+        </div>
+        <div class="field" id="f-state">
+          <label>State <span class="req">*</span></label>
+          <select id="state"><option value="">Select state</option></select>
+          <div class="err-msg">Required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Education &amp; health</h2><p>Background and wellness information</p></div>
+      <div class="card-body">
+        <div class="g2">
+          <div class="field">
+            <label>School / College</label>
+            <input type="text" id="school" placeholder="Institution name">
+          </div>
+          <div class="field">
+            <label>Job / Business</label>
+            <input type="text" id="job" placeholder="Employer or business name">
+          </div>
+        </div>
+        <div class="field">
+          <label>Student ID no. <span class="note">(Gujarat College &amp; University students only)</span></label>
+          <input type="text" id="stuid" placeholder="Student ID number">
+        </div>
+        <div class="field">
+          <label>Any medical condition</label>
+          <textarea id="medical" placeholder="Mention any illness, injury, or physical condition. Leave blank if none."></textarea>
+        </div>
+        <div class="field">
+          <label>Sports achievements</label>
+          <textarea id="sports" placeholder="Tournaments, certificates, rankings, etc."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row right">
+      <button class="btn-next" onclick="goPage(2)">Continue to Schedule &rsaquo;</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 2 — SCHEDULE & CONSENT
+  ════════════════════════════════════════════════ -->
+  <div class="form-page" id="page2">
+
+    <div class="card">
+      <div class="card-head"><h2>Batch &amp; schedule</h2><p>Choose your training plan at the academy</p></div>
+      <div class="card-body">
+
+        <div class="g2">
+          <div class="field" id="f-admdate">
+            <label>Admission date <span class="req">*</span></label>
+            <input type="date" id="admdate">
+            <div class="err-msg">Required</div>
+          </div>
+          <div class="field" id="f-duration">
+            <label>Session duration <span class="req">*</span></label>
+            <select id="duration">
+              <option value="">Select duration</option>
+              <option value="30 mins">30 minutes</option>
+              <option value="45 mins">45 minutes</option>
+              <option value="60 mins">60 minutes</option>
+              <option value="90 mins">90 minutes</option>
+              <option value="120 mins">120 minutes</option>
+            </select>
+            <div class="err-msg">Required</div>
+          </div>
+        </div>
+
+        <div class="field" id="f-slot">
+          <label>Preferred time slot <span class="req">*</span></label>
+          <select id="timeSlot" onchange="checkOtherSlot()">
+            <option value="">Select a time slot</option>
+            <option value="6:00 AM – 7:00 AM">6:00 AM – 7:00 AM</option>
+            <option value="7:00 AM – 8:00 AM">7:00 AM – 8:00 AM</option>
+            <option value="8:00 AM – 9:00 AM">8:00 AM – 9:00 AM</option>
+            <option value="9:00 AM – 10:00 AM">9:00 AM – 10:00 AM</option>
+            <option value="10:00 AM – 11:00 AM">10:00 AM – 11:00 AM</option>
+            <option value="4:00 PM – 5:00 PM">4:00 PM – 5:00 PM</option>
+            <option value="5:00 PM – 6:00 PM">5:00 PM – 6:00 PM</option>
+            <option value="6:00 PM – 7:00 PM">6:00 PM – 7:00 PM</option>
+            <option value="7:00 PM – 8:00 PM">7:00 PM – 8:00 PM</option>
+            <option value="8:00 PM – 9:00 PM">8:00 PM – 9:00 PM</option>
+            <option value="Other">Other — specify below</option>
+          </select>
+          <div class="err-msg">Required</div>
+        </div>
+        <div class="field" id="f-otherSlot" style="display:none;">
+          <label>Specify your preferred time</label>
+          <input type="text" id="otherSlot" placeholder="e.g. 11:00 AM – 12:00 PM">
+        </div>
+
+        <div class="field" id="f-daysweek">
+          <label>Days per week <span class="req">*</span></label>
+          <div class="pill-group">
+            <div class="pill" data-group="dw" data-val="3" onclick="selectDaysWeek(this)">3 days</div>
+            <div class="pill" data-group="dw" data-val="5" onclick="selectDaysWeek(this)">5 days</div>
+            <div class="pill" data-group="dw" data-val="6" onclick="selectDaysWeek(this)">6 days</div>
+            <div class="pill" data-group="dw" data-val="7" onclick="selectDaysWeek(this)">7 days</div>
+          </div>
+          <div class="err-msg" id="e-dw">Please select days per week</div>
+        </div>
+
+        <div class="field">
+          <label>Training days</label>
+          <div class="chip-group" id="dayChips">
+            <div class="chip disabled" id="chip-MO" data-day="MO">Mon</div>
+            <div class="chip disabled" id="chip-TU" data-day="TU">Tue</div>
+            <div class="chip disabled" id="chip-WE" data-day="WE">Wed</div>
+            <div class="chip disabled" id="chip-TH" data-day="TH">Thu</div>
+            <div class="chip disabled" id="chip-FR" data-day="FR">Fri</div>
+            <div class="chip disabled" id="chip-SA" data-day="SA">Sat</div>
+            <div class="chip disabled" id="chip-SU" data-day="SU">Sun</div>
+          </div>
+          <p class="day-hint" id="dayHint">Training days will be set after selecting days per week above</p>
+          <div class="err-msg" id="e-days" style="display:none;">Please select exactly 3 weekdays (Mon–Fri)</div>
+        </div>
+
+        <div class="field">
+          <label>Fee receipt no.</label>
+          <input type="text" id="feeReceipt" placeholder="Receipt number (if already paid)">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Rules &amp; consent</h2><p>Please read all rules carefully before agreeing</p></div>
+      <div class="card-body">
+        <ul class="rules-box">
+          <li>YV&HF does not have an extension policy due to Travel, Injury, or Exam. Extension only provided in case of religious fasting.</li>
+          <li>Players will not be allowed to play in any other batch timings except their own selected batches. Management/Academy or coach is not responsible for any injury caused or any aggravation.</li>
+          <li>In case of any casualty or health problem while playing tennis please consult your Doctor/Physician before starting tennis.</li>
+          <li>All payments must be made in whole prior to the terms by due date. Fees after due date are accepted with a penalty of Rs. 50 per day.</li>
+          <li>In case you have had any serious sickness-illness injury, please declare it before hand. Even in such cases, the management/Academy or coach will not be responsible for re-occurrence or aggravation of the same.</li>
+          <li>Players are responsible for any breakage, damage or loss of the article of YV&HF. They will be penalized for the same.</li>
+          <li>Management is not responsible for any lost or theft of valuable things.</li>
+          <li>You should wear proper tennis shoes which have non-marking out sole.</li>
+          <li>There may be dates where you will be asked to perform specialized tasks or complete along with or without supervision.</li>
+          <li>We accept payment through CASH/CHEQUE/UPI.</li>
+          <li>Any date joining, month will count from date to date.</li>
+          <li>The duration of the batch will contain fitness, theory and other useful contents &amp; breaks over and above in court playing.</li>
+          <li>The management can change the batch structure, batch timing and coaches without prior notice.</li>
+          <li>Permission there may be cancellation of batch for 10-12 days in quarter owing to tournament play, maintenance, etc.</li>
+          <li>Management reserves the right to admission.</li>
+          <li>Physical training given at the academy is only an introduction to fitness programmed. Aspiring competitive players will need to get specialized training.</li>
+          <li>No eatables and harmful substance are allowed in around of court premises.</li>
+          <li>The management has a right cancel the admission without assigning any reason.</li>
+          <li>All players should obey above given all rules and regulation.</li>
+        </ul>
+
+        <div style="margin-top:15px;">
+          <div class="consent-item" id="ci1" onclick="toggleConsent(1)">
+            <input type="checkbox" id="cb1" onclick="event.stopPropagation();toggleConsent(1)">
+            <label for="cb1">I have read and will adhere to the rules and regulations set by YV&HF and commit to following them throughout my membership at the academy.</label>
+          </div>
+          <div class="consent-item" id="ci2" onclick="toggleConsent(2)">
+            <input type="checkbox" id="cb2" onclick="event.stopPropagation();toggleConsent(2)">
+            <label for="cb2">I confirm that all information provided in this admission form is accurate, complete, and true to the best of my knowledge.</label>
+          </div>
+        </div>
+        <div class="err-msg" id="e-consent" style="display:none;margin-top:4px;">Please agree to both declarations to continue</div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goPage(1)">&lsaquo; Back to Personal</button>
+      <button class="btn-next" onclick="goPage(3)">Preview &amp; Submit &rsaquo;</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 3 — REVIEW & SUBMIT
+  ════════════════════════════════════════════════ -->
+  <div class="form-page" id="page3">
+    <div class="card" style="overflow:hidden;">
+      <div class="review-hero">
+        <div class="review-avatar" id="reviewAvatar">--</div>
+        <h3 id="reviewName">—</h3>
+        <p id="reviewSub">Admission preview · Yuva Vikas &amp; Health Foundation</p>
+      </div>
+
+      <div class="review-section">
+        <h4>Personal details</h4>
+        <div class="review-row"><span class="rk">Date of birth</span><span class="rv" id="rv-dob">—</span></div>
+        <div class="review-row"><span class="rk">Gender</span><span class="rv" id="rv-gender">—</span></div>
+        <div class="review-row"><span class="rk">Contact</span><span class="rv" id="rv-phone">—</span></div>
+        <div class="review-row"><span class="rk">Emergency contact</span><span class="rv" id="rv-em">—</span></div>
+        <div class="review-row"><span class="rk">Email</span><span class="rv" id="rv-email">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <h4>Address</h4>
+        <div class="review-row"><span class="rk">Line 1</span><span class="rv" id="rv-a1">—</span></div>
+        <div class="review-row"><span class="rk">Line 2</span><span class="rv" id="rv-a2">—</span></div>
+        <div class="review-row"><span class="rk">Landmark</span><span class="rv" id="rv-a3">—</span></div>
+        <div class="review-row"><span class="rk">City · PIN · State</span><span class="rv" id="rv-citypin">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <h4>Education &amp; health</h4>
+        <div class="review-row"><span class="rk">School / College</span><span class="rv" id="rv-school">—</span></div>
+        <div class="review-row"><span class="rk">Job / Business</span><span class="rv" id="rv-job">—</span></div>
+        <div class="review-row"><span class="rk">Student ID</span><span class="rv" id="rv-stuid">—</span></div>
+        <div class="review-row"><span class="rk">Medical condition</span><span class="rv" id="rv-medical">—</span></div>
+        <div class="review-row"><span class="rk">Sports achievements</span><span class="rv" id="rv-sports">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <h4>Batch &amp; schedule</h4>
+        <div class="review-row"><span class="rk">Admission date</span><span class="rv" id="rv-admdate">—</span></div>
+        <div class="review-row"><span class="rk">Session duration</span><span class="rv" id="rv-duration">—</span></div>
+        <div class="review-row"><span class="rk">Time slot</span><span class="rv" id="rv-slot">—</span></div>
+        <div class="review-row"><span class="rk">Days per week</span><span class="rv" id="rv-dw">—</span></div>
+        <div class="review-row"><span class="rk">Training days</span><span class="rv"><div class="day-tags" id="rv-days"></div></span></div>
+        <div class="review-row"><span class="rk">Fee receipt</span><span class="rv" id="rv-fee">—</span></div>
+      </div>
+
+      <div class="review-section">
+        <h4>Consent</h4>
+        <div class="review-row"><span class="rk">Rules agreed</span><span class="rv green">&#10003; Confirmed</span></div>
+        <div class="review-row"><span class="rk">Information accurate</span><span class="rv green">&#10003; Confirmed</span></div>
+      </div>
+    </div>
+
+    <div class="error-banner" id="submitErrorBanner">
+      Submission failed. Please check your connection and try again.
+    </div>
+
+    <div style="margin-bottom:10px;">
+      <button class="btn-submit" id="submitBtn" onclick="submitForm()">Submit Admission Form</button>
+    </div>
+    <div class="nav-row" style="justify-content:center;">
+      <button class="btn-back" onclick="goPage(2)">&lsaquo; Edit details</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       PAGE 4 — SUCCESS
+  ════════════════════════════════════════════════ -->
+  <div class="form-page" id="page4">
+    <div class="card">
+      <div class="success-wrap">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>You're all set!</h2>
+        <p>Your admission has been successfully submitted to Yuva Vikas &amp; Health Foundation. Your ID will be assigned by the academy and communicated to you shortly.</p>
+        <div class="success-detail">
+          <div class="dl">SUBMITTED NAME</div>
+          <div class="dv" id="done-name">—</div>
+          <div class="dl">CONTACT NUMBER</div>
+          <div class="dv" id="done-phone">—</div>
+          <div class="dl">ADMISSION DATE</div>
+          <div class="dv" id="done-date">—</div>
+        </div>
+        <button class="btn-submit" onclick="resetForm()">Submit a New Admission Form</button>
+        <button class="btn-new" onclick="resetForm()">+ Start Fresh for Another Player</button>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--t3);margin-top:16px;">
+      Yuva Vikas &amp; Health Foundation · Gujarat College Sports Ground, Ellis Bridge, Ahmedabad 380006
+    </p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+/* ── CONFIGURATION — paste your Apps Script Web App URL here ── */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzBYRxrAiKn3qQltQ5EIAkzwNQiiCJpfFitjEktOAmhJglpZBRhHDYWRI2fUkVLhDGYQ/exec';
+
+/* ── DATA ───────────────────────────────────────────────────── */
+const COUNTRIES = [
+  {code:'IN',label:'India (+91)',dial:'+91'},
+  {code:'US',label:'United States (+1)',dial:'+1'},
+  {code:'GB',label:'United Kingdom (+44)',dial:'+44'},
+  {code:'AE',label:'UAE (+971)',dial:'+971'},
+  {code:'AU',label:'Australia (+61)',dial:'+61'},
+  {code:'CA',label:'Canada (+1)',dial:'+1'},
+  {code:'SG',label:'Singapore (+65)',dial:'+65'},
+  {code:'NZ',label:'New Zealand (+64)',dial:'+64'},
+  {code:'NP',label:'Nepal (+977)',dial:'+977'},
+  {code:'BD',label:'Bangladesh (+880)',dial:'+880'},
+  {code:'PK',label:'Pakistan (+92)',dial:'+92'},
+  {code:'LK',label:'Sri Lanka (+94)',dial:'+94'},
+  {code:'MY',label:'Malaysia (+60)',dial:'+60'},
+  {code:'QA',label:'Qatar (+974)',dial:'+974'},
+  {code:'SA',label:'Saudi Arabia (+966)',dial:'+966'},
+  {code:'KW',label:'Kuwait (+965)',dial:'+965'},
+  {code:'BH',label:'Bahrain (+973)',dial:'+973'},
+  {code:'OM',label:'Oman (+968)',dial:'+968'},
+  {code:'DE',label:'Germany (+49)',dial:'+49'},
+  {code:'FR',label:'France (+33)',dial:'+33'},
+  {code:'JP',label:'Japan (+81)',dial:'+81'},
+  {code:'ZA',label:'South Africa (+27)',dial:'+27'},
+];
+const STATES = ['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Andaman & Nicobar Islands','Chandigarh','Dadra & Nagar Haveli and Daman & Diu','Delhi','Jammu & Kashmir','Ladakh','Lakshadweep','Puducherry'];
+const DAY_MAP = {MO:'Mon',TU:'Tue',WE:'Wed',TH:'Thu',FR:'Fri',SA:'Sat',SU:'Sun'};
+
+/* ── STATE ──────────────────────────────────────────────────── */
+let selectedDaysPerWeek = null;
+let selectedDays = [];
+let photoBase64 = null;
+
+/* ── INIT ───────────────────────────────────────────────────── */
+function init() {
+  // Build country dropdowns
+  ['phoneCC','emCC'].forEach(id => {
+    const sel = document.getElementById(id);
+    COUNTRIES.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c.dial;
+      o.textContent = c.label;
+      if (c.code === 'IN') o.selected = true;
+      sel.appendChild(o);
+    });
+  });
+  // Build state dropdown
+  const stSel = document.getElementById('state');
+  STATES.forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    stSel.appendChild(o);
+  });
+}
+init();
+
+/* ── PILL SELECTOR ──────────────────────────────────────────── */
+function selectPill(el) {
+  const group = el.dataset.group;
+  document.querySelectorAll(`.pill[data-group="${group}"]`).forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  if (group === 'gender') document.getElementById('e-gender').style.display = 'none';
+}
+
+/* ── DAYS PER WEEK LOGIC ────────────────────────────────────── */
+function setChip(day, mode) {
+  const chip = document.getElementById('chip-' + day);
+  if (!chip) return;
+  chip.className = 'chip';
+  chip.onclick = null;
+  if (mode === 'locked') {
+    chip.classList.add('locked');
+  } else if (mode === 'pickable') {
+    chip.classList.add('pickable');
+    chip.onclick = () => toggle3Day(chip);
+  } else if (mode === 'picked') {
+    chip.classList.add('picked','pickable');
+    chip.onclick = () => toggle3Day(chip);
+  } else {
+    chip.classList.add('disabled');
+  }
+}
+
+function selectDaysWeek(el) {
+  document.querySelectorAll('.pill[data-group="dw"]').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedDaysPerWeek = parseInt(el.dataset.val);
+  selectedDays = [];
+  document.getElementById('e-dw').style.display = 'none';
+  document.getElementById('e-days').style.display = 'none';
+
+  const allDays = ['MO','TU','WE','TH','FR','SA','SU'];
+  allDays.forEach(d => setChip(d, 'disabled'));
+
+  if (selectedDaysPerWeek === 7) {
+    selectedDays = [...allDays];
+    allDays.forEach(d => setChip(d, 'locked'));
+    document.getElementById('dayHint').textContent = 'All 7 days selected — Mon to Sun (fixed for 7-day plan)';
+  } else if (selectedDaysPerWeek === 6) {
+    selectedDays = ['MO','TU','WE','TH','FR','SA'];
+    ['MO','TU','WE','TH','FR','SA'].forEach(d => setChip(d, 'locked'));
+    setChip('SU', 'disabled');
+    document.getElementById('dayHint').textContent = 'Mon to Sat — 6 days selected (Sunday not available)';
+  } else if (selectedDaysPerWeek === 5) {
+    selectedDays = ['MO','TU','WE','TH','FR'];
+    ['MO','TU','WE','TH','FR'].forEach(d => setChip(d, 'locked'));
+    setChip('SA', 'disabled');
+    setChip('SU', 'disabled');
+    document.getElementById('dayHint').textContent = 'Mon to Fri — 5 weekdays selected (fixed for 5-day plan)';
+  } else if (selectedDaysPerWeek === 3) {
+    selectedDays = [];
+    ['MO','TU','WE','TH','FR'].forEach(d => setChip(d, 'pickable'));
+    setChip('SA', 'disabled');
+    setChip('SU', 'disabled');
+    document.getElementById('dayHint').textContent = 'Select any 3 weekdays from Mon–Fri';
+  }
+}
+
+function toggle3Day(chip) {
+  const day = chip.dataset.day;
+  if (chip.classList.contains('picked')) {
+    chip.classList.remove('picked');
+    selectedDays = selectedDays.filter(d => d !== day);
+    document.getElementById('e-days').style.display = 'none';
+  } else {
+    if (selectedDays.length >= 3) {
+      document.getElementById('e-days').textContent = 'Maximum 3 weekdays. Deselect one first.';
+      document.getElementById('e-days').style.display = 'flex';
+      return;
+    }
+    chip.classList.add('picked');
+    selectedDays.push(day);
+    if (selectedDays.length === 3) document.getElementById('e-days').style.display = 'none';
+  }
+}
+
+/* ── PHOTO ──────────────────────────────────────────────────── */
+function handlePhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  if (file.size > 5 * 1024 * 1024) { alert('Photo must be under 5 MB.'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    photoBase64 = e.target.result;
+    const prev = document.getElementById('photoPreview');
+    prev.src = photoBase64;
+    prev.style.display = 'block';
+    document.getElementById('uploadUI').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ── SLOT ───────────────────────────────────────────────────── */
+function checkOtherSlot() {
+  const v = document.getElementById('timeSlot').value;
+  document.getElementById('f-otherSlot').style.display = v === 'Other' ? 'block' : 'none';
+}
+
+/* ── CONSENT ────────────────────────────────────────────────── */
+function toggleConsent(n) {
+  const cb = document.getElementById('cb' + n);
+  const ci = document.getElementById('ci' + n);
+  cb.checked = !cb.checked;
+  ci.classList.toggle('checked', cb.checked);
+  document.getElementById('e-consent').style.display = 'none';
+}
+
+/* ── DATE FORMAT ────────────────────────────────────────────── */
+function fmtDate(v) {
+  if (!v) return '—';
+  const [y, m, d] = v.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+/* ── VALIDATION ─────────────────────────────────────────────── */
+function setInvalid(fieldId, invalid) {
+  const el = document.getElementById(fieldId);
+  if (el) el.classList.toggle('invalid', invalid);
+}
+
+function validatePage1() {
+  let ok = true;
+  const checks = [
+    ['f-fname', document.getElementById('fname').value.trim()],
+    ['f-sname', document.getElementById('sname').value.trim()],
+    ['f-dob',   document.getElementById('dob').value],
+    ['f-phone', document.getElementById('phoneNum').value.trim()],
+    ['f-emphone', document.getElementById('emNum').value.trim()],
+    ['f-addr1', document.getElementById('addr1').value.trim()],
+    ['f-addr2', document.getElementById('addr2').value.trim()],
+    ['f-city',  document.getElementById('city').value.trim()],
+    ['f-state', document.getElementById('state').value],
+  ];
+  checks.forEach(([id, val]) => { if (!val) { setInvalid(id, true); ok = false; } else setInvalid(id, false); });
+
+  const pin = document.getElementById('pin').value.trim();
+  if (!pin || pin.length !== 6) { setInvalid('f-pin', true); ok = false; } else setInvalid('f-pin', false);
+
+  if (!document.querySelector('.pill[data-group="gender"].selected')) {
+    document.getElementById('e-gender').style.display = 'flex'; ok = false;
+  }
+  return ok;
+}
+
+function validatePage2() {
+  let ok = true;
+  [['f-admdate','admdate'],['f-duration','duration'],['f-slot','timeSlot']].forEach(([fid, iid]) => {
+    const v = document.getElementById(iid).value;
+    if (!v) { setInvalid(fid, true); ok = false; } else setInvalid(fid, false);
+  });
+  if (!selectedDaysPerWeek) { document.getElementById('e-dw').style.display = 'flex'; ok = false; }
+  if (selectedDaysPerWeek === 3 && selectedDays.length !== 3) {
+    document.getElementById('e-days').textContent = 'Please select exactly 3 weekdays (Mon–Fri)';
+    document.getElementById('e-days').style.display = 'flex'; ok = false;
+  }
+  if (!document.getElementById('cb1').checked || !document.getElementById('cb2').checked) {
+    document.getElementById('e-consent').style.display = 'flex'; ok = false;
+  }
+  return ok;
+}
+
+/* ── PAGE NAVIGATION ────────────────────────────────────────── */
+function goPage(n) {
+  if (n === 2 && !validatePage1()) return;
+  if (n === 3 && !validatePage2()) { buildReview(); return; }
+  if (n === 3) buildReview();
+
+  document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+
+  ['tab1','tab2','tab3'].forEach((tabId, i) => {
+    const tab = document.getElementById(tabId);
+    tab.classList.remove('active','done');
+    if (i + 1 < n) tab.classList.add('done');
+    else if (i + 1 === n) tab.classList.add('active');
+  });
+
+  const pct = n === 1 ? 33 : n === 2 ? 66 : 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* ── BUILD REVIEW ───────────────────────────────────────────── */
+function buildReview() {
+  const fn = document.getElementById('fname').value.trim();
+  const mn = document.getElementById('mname').value.trim();
+  const sn = document.getElementById('sname').value.trim();
+  const full = [fn, mn, sn].filter(Boolean).join(' ');
+  const initials = ((fn[0]||'') + (sn[0]||'')).toUpperCase() || '?';
+
+  const av = document.getElementById('reviewAvatar');
+  if (photoBase64) {
+    av.innerHTML = `<img src="${photoBase64}" alt="Photo">`;
+  } else {
+    av.textContent = initials;
+  }
+  document.getElementById('reviewName').textContent = full;
+
+  const gEl = document.querySelector('.pill[data-group="gender"].selected');
+  const phoneCC = document.getElementById('phoneCC');
+  const emCC = document.getElementById('emCC');
+  const phoneDial = phoneCC.options[phoneCC.selectedIndex]?.text.match(/\(\+[\d]+\)/)?.[0] || '';
+  const emDial = emCC.options[emCC.selectedIndex]?.text.match(/\(\+[\d]+\)/)?.[0] || '';
+  const slotV = document.getElementById('timeSlot').value;
+  const finalSlot = slotV === 'Other' ? (document.getElementById('otherSlot').value || 'Other — not specified') : slotV;
+
+  function sv(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val || '—';
+  }
+
+  sv('rv-dob',    fmtDate(document.getElementById('dob').value));
+  sv('rv-gender', gEl ? gEl.dataset.val : '—');
+  sv('rv-phone',  `${phoneDial} ${document.getElementById('phoneNum').value}`);
+  sv('rv-em',     `${emDial} ${document.getElementById('emNum').value}`);
+  sv('rv-email',  document.getElementById('email').value || 'Not provided');
+  sv('rv-a1',     document.getElementById('addr1').value);
+  sv('rv-a2',     document.getElementById('addr2').value);
+  sv('rv-a3',     document.getElementById('addr3').value || '—');
+  sv('rv-citypin', [document.getElementById('city').value, document.getElementById('pin').value, document.getElementById('state').value].filter(Boolean).join(' · '));
+  sv('rv-school', document.getElementById('school').value || 'Not provided');
+  sv('rv-job',    document.getElementById('job').value || 'Not provided');
+  sv('rv-stuid',  document.getElementById('stuid').value || 'Not applicable');
+  sv('rv-medical',document.getElementById('medical').value || 'None declared');
+  sv('rv-sports', document.getElementById('sports').value || 'Not provided');
+  sv('rv-admdate',fmtDate(document.getElementById('admdate').value));
+  sv('rv-duration',document.getElementById('duration').value);
+  sv('rv-slot',   finalSlot);
+  sv('rv-dw',     (selectedDaysPerWeek || '—') + ' days/week');
+  sv('rv-fee',    document.getElementById('feeReceipt').value || 'Not yet provided');
+
+  document.getElementById('rv-days').innerHTML =
+    selectedDays.map(d => `<span class="day-tag">${DAY_MAP[d]}</span>`).join('');
+
+  // success page values
+  sv('done-name',  full);
+  sv('done-phone', `${phoneDial} ${document.getElementById('phoneNum').value}`);
+  sv('done-date',  fmtDate(document.getElementById('admdate').value));
+}
+
+/* ── COLLECT FORM DATA ──────────────────────────────────────── */
+function collectData() {
+  const fn = document.getElementById('fname').value.trim();
+  const mn = document.getElementById('mname').value.trim();
+  const sn = document.getElementById('sname').value.trim();
+  const gEl = document.querySelector('.pill[data-group="gender"].selected');
+  const phoneCC = document.getElementById('phoneCC');
+  const emCC = document.getElementById('emCC');
+  const phoneDial = phoneCC.options[phoneCC.selectedIndex]?.text.match(/\(\+[\d]+\)/)?.[0] || '';
+  const emDial = emCC.options[emCC.selectedIndex]?.text.match(/\(\+[\d]+\)/)?.[0] || '';
+  const slotV = document.getElementById('timeSlot').value;
+  const finalSlot = slotV === 'Other' ? (document.getElementById('otherSlot').value || 'Other') : slotV;
+  const ts = new Date().toISOString();
+
+  return {
+    timestamp:           ts,
+    firstName:           fn,
+    middleName:          mn,
+    surname:             sn,
+    fullName:            [fn, mn, sn].filter(Boolean).join(' '),
+    dateOfBirth:         fmtDate(document.getElementById('dob').value),
+    gender:              gEl ? gEl.dataset.val : '',
+    email:               document.getElementById('email').value.trim(),
+    contactCountryCode:  phoneDial,
+    contactNumber:       document.getElementById('phoneNum').value.trim(),
+    contactFull:         `${phoneDial} ${document.getElementById('phoneNum').value.trim()}`,
+    emergencyCountryCode:emDial,
+    emergencyNumber:     document.getElementById('emNum').value.trim(),
+    emergencyFull:       `${emDial} ${document.getElementById('emNum').value.trim()}`,
+    addressLine1:        document.getElementById('addr1').value.trim(),
+    addressLine2:        document.getElementById('addr2').value.trim(),
+    landmark:            document.getElementById('addr3').value.trim(),
+    city:                document.getElementById('city').value.trim(),
+    pincode:             document.getElementById('pin').value.trim(),
+    state:               document.getElementById('state').value,
+    school:              document.getElementById('school').value.trim(),
+    jobBusiness:         document.getElementById('job').value.trim(),
+    studentId:           document.getElementById('stuid').value.trim(),
+    medicalCondition:    document.getElementById('medical').value.trim(),
+    sportsAchievements:  document.getElementById('sports').value.trim(),
+    admissionDate:       fmtDate(document.getElementById('admdate').value),
+    sessionDuration:     document.getElementById('duration').value,
+    timeSlot:            finalSlot,
+    daysPerWeek:         selectedDaysPerWeek,
+    trainingDays:        selectedDays.map(d => DAY_MAP[d]).join(', '),
+    feeReceiptNo:        document.getElementById('feeReceipt').value.trim(),
+    rulesAgreed:         'Yes',
+    infoAccurate:        'Yes',
+    photoAttached:       photoBase64 ? 'Yes' : 'No',
+  };
+}
+
+/* ── SUBMIT ─────────────────────────────────────────────────── */
+async function submitForm() {
+  const btn = document.getElementById('submitBtn');
+  const overlay = document.getElementById('sendingOverlay');
+  const errorBanner = document.getElementById('submitErrorBanner');
+
+  errorBanner.classList.remove('visible');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  overlay.classList.add('visible');
+
+  const data = collectData();
+
+  try {
+    const resp = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      mode: 'no-cors',
+    });
+    // no-cors means we can't read the response body, so treat as success
+    overlay.classList.remove('visible');
+    document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page4').classList.add('active');
+    ['tab1','tab2','tab3'].forEach(id => document.getElementById(id).classList.add('done'));
+    document.getElementById('progressFill').style.width = '100%';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    overlay.classList.remove('visible');
+    btn.disabled = false;
+    btn.textContent = 'Submit Admission Form';
+    errorBanner.classList.add('visible');
+  }
+}
+
+/* ── RESET ──────────────────────────────────────────────────── */
+function resetForm() {
+  document.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],textarea').forEach(i => i.value = '');
+  document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+  document.querySelectorAll('.pill.selected').forEach(p => p.classList.remove('selected'));
+  document.getElementById('photoPreview').style.display = 'none';
+  document.getElementById('uploadUI').style.display = 'block';
+  document.getElementById('cb1').checked = false; document.getElementById('ci1').classList.remove('checked');
+  document.getElementById('cb2').checked = false; document.getElementById('ci2').classList.remove('checked');
+  document.getElementById('f-otherSlot').style.display = 'none';
+  document.querySelectorAll('.invalid').forEach(e => e.classList.remove('invalid'));
+  ['e-gender','e-dw','e-days','e-consent'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  selectedDaysPerWeek = null;
+  selectedDays = [];
+  photoBase64 = null;
+  ['MO','TU','WE','TH','FR','SA','SU'].forEach(d => setChip(d, 'disabled'));
+  document.getElementById('dayHint').textContent = 'Training days will be set after selecting days per week above';
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('submitBtn').textContent = 'Submit Admission Form';
+  init();
+  document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page1').classList.add('active');
+  ['tab1','tab2','tab3'].forEach((id, i) => {
+    const t = document.getElementById(id);
+    t.classList.remove('active','done');
+    if (i === 0) t.classList.add('active');
+  });
+  document.getElementById('progressFill').style.width = '33%';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
