@@ -783,7 +783,8 @@ body{
 
 <script>
 /* ── CONFIGURATION — paste your Apps Script Web App URL here ── */
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwzBYRxrAiKn3qQltQ5EIAkzwNQiiCJpfFitjEktOAmhJglpZBRhHDYWRI2fUkVLhDGYQ/exec';
+// Automatically points back to the same Apps Script URL that served this page
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8qRxl4Ts2SUStLAvJGwSE0kTGz_O73WGc_Uo3kkwacEYr3qLPHDhmlS-xG4J-MF6d/exec';
 
 /* ── DATA ───────────────────────────────────────────────────── */
 const COUNTRIES = [
@@ -1133,7 +1134,7 @@ function collectData() {
     feeReceiptNo:        document.getElementById('feeReceipt').value.trim(),
     rulesAgreed:         'Yes',
     infoAccurate:        'Yes',
-    photoAttached:       photoBase64 ? 'Yes' : 'No',
+    photoBase64:         photoBase64 || '',   // full base64 image — saved to Drive by Apps Script
   };
 }
 
